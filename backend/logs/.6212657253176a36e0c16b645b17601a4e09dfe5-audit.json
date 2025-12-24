@@ -1,0 +1,15 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "E:\\Desktop_copy\\Projects\\student_management_system\\backend\\logs\\.6212657253176a36e0c16b645b17601a4e09dfe5-audit.json",
+    "files": [
+        {
+            "date": 1766515130005,
+            "name": "E:\\Desktop_copy\\Projects\\student_management_system\\backend\\logs\\info-2025-12-24.log",
+            "hash": "b84ebabd4ba51ce1aba801d6b07b05bd8e487899c300f4dd574491052ed804a5"
+        }
+    ],
+    "hashType": "sha256"
+}

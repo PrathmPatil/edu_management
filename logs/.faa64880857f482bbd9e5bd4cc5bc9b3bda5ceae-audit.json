@@ -1,0 +1,20 @@
+{
+    "keep": {
+        "days": true,
+        "amount": 14
+    },
+    "auditLog": "E:\\Desktop_copy\\Projects\\student_management_system\\logs\\.faa64880857f482bbd9e5bd4cc5bc9b3bda5ceae-audit.json",
+    "files": [
+        {
+            "date": 1766513567587,
+            "name": "E:\\Desktop_copy\\Projects\\student_management_system\\logs\\error-2025-12-23.log",
+            "hash": "4a1266ba2e40b56ac9de96768de6d16aa9ade1bcfe0f39df33289d96c50debe4"
+        },
+        {
+            "date": 1766514908719,
+            "name": "E:\\Desktop_copy\\Projects\\student_management_system\\logs\\error-2025-12-24.log",
+            "hash": "1b49e5a09bc6d66e716ad90e80e28f6b6ad6806e9b6f5ea5906199005bed21a2"
+        }
+    ],
+    "hashType": "sha256"
+}
