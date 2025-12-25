@@ -11,9 +11,9 @@ router.get("/", controller.getStudents);
 router.get("/:id", controller.getStudentById);
 
 router.post("/", role(["Admin"]), controller.createStudent);
-router.put("/", role(["Admin", "Student"]), backupMiddleware('student', 'update'), controller.updateStudent);
+router.put("/:id", role(["Admin", "Student"]), backupMiddleware('student', 'update'), controller.updateStudent);
 router.delete("/", role(["Admin"]), backupMiddleware('student', 'delete'), controller.deleteStudent);
-router.post('/bulk-upload', upload.single('file'), controller.bulkUploadStudents);
+router.post('/bulk-upload',backupMiddleware('student', 'insert'), upload.single('file'), controller.bulkUploadStudents);
 
 
 

@@ -2,13 +2,13 @@ const Student = require("../models/Student.model");
 const bcrypt = require("bcryptjs");
 const express = require("express");
 const XLSX = require("xlsx");
-const fs = require('fs');
-const path = require('path');
+const fs = require("fs");
+const path = require("path");
 const logger = require("../logger");
 const { studentSchema } = require("../validation/student.validation");
 
 exports.createStudent = async (req, res) => {
-   try {
+  try {
     const data = req.decrypted;
 
     if (!data?.email) {
@@ -60,8 +60,8 @@ exports.createStudent = async (req, res) => {
 };
 
 exports.getStudents = async (req, res) => {
-  const { search = "", page = 1, limit = 5 } = req.query;
-
+  const data = req.decrypted;
+  const { search = "", page = 1, limit = 10 } = data;
   const query = {
     $or: [
       { name: { $regex: search, $options: "i" } },
@@ -77,7 +77,7 @@ exports.getStudents = async (req, res) => {
 
   const total = await Student.countDocuments({ ...query, is_deleted: false });
 
-  res.json({ students, total });
+  res.json({ students, total, totalPages: Math.ceil(total / limit) });
 };
 
 exports.getStudentById = async (req, res) => {

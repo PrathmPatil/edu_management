@@ -4,10 +4,25 @@ const backupMiddleware = (collectionName, action) => {
   return async (req, res, next) => {
     try {
       const Model = require(`../models/${collectionName}.model`);
-      const doc = await Model.findById(req.params.id);
-      if (!doc) return res.status(404).json({ message: `${collectionName} not found` });
 
-      // Save old data to backup
+      // 🔐 Get ID from decrypted payload
+      const documentId = req.decrypted?.id;
+
+      if (!documentId) {
+        return res.status(400).json({
+          message: "Document ID missing in payload"
+        });
+      }
+
+      const doc = await Model.findById(documentId);
+
+      if (!doc || doc.is_deleted) {
+        return res.status(404).json({
+          message: `${collectionName} not found`
+        });
+      }
+
+      // 🗄 Backup old data
       await Backup.create({
         collectionName,
         documentId: doc._id,
@@ -16,7 +31,7 @@ const backupMiddleware = (collectionName, action) => {
         updatedBy: req.user?.id || 'system'
       });
 
-      next(); // proceed to update/delete
+      next();
     } catch (err) {
       next(err);
     }
